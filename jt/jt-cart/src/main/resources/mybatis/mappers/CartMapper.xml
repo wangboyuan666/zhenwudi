@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jt.mapper.CartMapper">
+	<delete id="delete">
+		delete from tb_cart where user_id = #{userId} and item_id =#{itemId}
+	</delete>
+	<select id="findCartListByUsreId" resultType="com.jt.pojo.Cart">
+		select id,user_id,item_id,item_title,item_image,item_price,num from tb_cart where user_id = #{userId}
+	</select>
+	<update id="updateCartNum">
+		update tb_cart set num = #{num},updated=now() where user_id =#{userId} and item_id = #{itemId}
+	</update>
+	<update id="updateCart">
+		update tb_cart set num = #{num} ,updated = now() where id = #{id}
+	</update>
+</mapper>

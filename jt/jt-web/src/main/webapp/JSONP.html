@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JSONP测试</title>
+<script type="text/javascript" src="http://manage.jt.com/js/jquery-easyui-1.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		alert("测试访问开始!!!!!")
+		$.ajax({
+			url:"http://manage.jt.com/web/jsonpitem",
+			type:"get",				//jsonp只能支持get请求
+			dataType:"jsonp",       //dataType表示返回值类型
+			jsonp: "callback",    //指定参数名称
+			//jsonpCallback: "hello",  //指定回调函数名称
+			success:function (data){   //data经过jQuery封装返回就是json串
+				$.each(data,function(index,obj){
+					var id = obj.id;
+					var title = obj.title;
+					var sellPoint = obj.sellPoint;
+					var price = obj.price;
+					var num = obj.num;
+					var barcode = obj.barcode;
+					var cid = obj.cid;
+					var status = obj.status;
+					var tr = "<tr align='center'><td>"+id+"</td><td>"+title+"</td><td>"+sellPoint+"</td><td>"+price+"</td><td>"+num+"</td><td>"+barcode+"</td><td>"+cid+"</td><td>"+status+"</td><td><button>删除</button></td></tr>";
+					$("#t1").append(tr);
+				})
+			}	
+		});	
+	})
+</script>
+</head>
+<body>
+	<h1>JSON跨域请求测试</h1>
+	<table id="t1" border="1px" width="65%" align="center">
+		<tr>
+			<td colspan="6" align="center"><h3>学生信息</h3></td>
+		</tr>
+		<tr>
+			<th>id</th>
+			<th>标题</th>
+			<th>买点</th>
+			<th>价格</th>
+			<th>库存</th>
+			<th>条形码</th>
+			<th>叶子类目</th>
+			<th>状态</th>
+		</tr>
+	</table>
+</body>
+</html>
